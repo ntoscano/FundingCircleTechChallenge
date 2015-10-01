@@ -5,26 +5,26 @@ tableCreator is the function that created the matrix.
   It takes one argument, n, which defines the range of the table.
 */
 
-var range = function (start, end) {
+var range = function (n) {
   var result = [];
-  for (var i = start; i < end; i++){
+  for (var i = 0; i < n; i++){
     result.push(i);
   }
   return result;
 };
 
-var primeArray = function (start, end) {
+var primeArray = function (n) {
   var current = 2; 
-  var primes = range(0, end + 1);
+  var primes = range(n + 1);
   // While we haven't found all the primes.
   var primeIdentifyer = function(){
-    //Once we reach the end of the desired recursion cycle, filter nonprimes from final array
-    if(current >= end){
+    //Once we reach the n of the desired recursion cycle, filter nonprimes from final array
+    if(current >= n){
       return primes.slice(2).filter(function (val) {
-        return val && val >= start;
+        return val;
       });    
     }else{
-      for (var i = current + current; i <= end; i += current) {
+      for (var i = current + current; i <= n; i += current) {
         // null means not prime, a number means prime
         primes[i] = null;
       }  
@@ -33,7 +33,7 @@ var primeArray = function (start, end) {
         current += 1;
       // Then continue to advance it until we hit a prime number or we are out of range.
       return primeIdentifyer();
-      } while (!primes[current] && current <= end);  
+      } while (!primes[current] && current <= n);  
     }
   }
   return primeIdentifyer();
@@ -42,7 +42,7 @@ var primeArray = function (start, end) {
 var tableCreater = function(n){
   var table = [];
   //Populate first row
-  table.push(primeArray(1, n));
+  table.push(primeArray(n));
   table[0].unshift(null);
   //Populate first column
   for(var i = 1; i < table[0].length; i++){
