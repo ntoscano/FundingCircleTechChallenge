@@ -1,0 +1,12 @@
+{
+  "name": "FundingCircleTechChallenge",
+  "version": "1.0.0",
+  "main": "./PrimeMultiTable.js",
+  "scripts": {
+    "start": "grunt test"
+  },
+  "dependencies": {
+    "mocha": "^2.3.3",
+    "should": "^7.1.0"
+  }
+}

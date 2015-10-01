@@ -35,11 +35,12 @@ var primeArray = function (n) {
       return primeIdentifyer();
       } while (!primes[current] && current <= n);  
     }
-  }
+  };
   return primeIdentifyer();
 };
 
 var tableCreater = function(n){
+  if(typeof n !== 'number' || n < 2 || n !== Math.floor(n)) return "tableCreater only takes positive integers greater than 1";
   var table = [];
   //Populate first row
   table.push(primeArray(n));
@@ -53,4 +54,4 @@ var tableCreater = function(n){
     }
   }
   return table;
-}
+};
