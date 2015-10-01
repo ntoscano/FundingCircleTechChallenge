@@ -5,6 +5,22 @@ tableCreator is the function that created the matrix.
   It takes one argument, n, which defines the range of the table.
 */
 
+/*
+Time complexity is defined by the most expensive opperation in a function. 
+  The most expensive opperations here are the for-loop inside the recursive function call 'primeIdentifyer'
+  and the nested for-loop in 'tableCreator'.
+
+  This means the time complexity is O(n^2).
+
+  Consequently, this function becomes quadradically more expensive as n increases.
+
+  Given that this is a matrix operation, O(n^2) isn't too bad.
+
+Space complexity is defined by how many objects in memory get instantiated in relation to the input.
+  Since we're creating a matrix, it doesn't make sense to expect anything other than O(n^2),
+  given that the requirements of the problem were to create an n * n matrix.
+*/
+
 var range = function (n) {
   var result = [];
   for (var i = 0; i < n; i++){
