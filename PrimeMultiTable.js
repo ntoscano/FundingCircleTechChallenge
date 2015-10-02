@@ -67,5 +67,6 @@ var tableCreater = function(n){
       table[i][j] = table[i][0] * table[0][j];
     }
   }
+  //console.log(table);
   return table;
 };
