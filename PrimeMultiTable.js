@@ -44,12 +44,10 @@ var primeArray = function (n) {
         // null means not prime, a number means prime
         primes[i] = null;
       }  
-      do {
-        // Advance current at least once
-        current += 1;
+      // Advance current at least once
+      current += 1;
       // Then continue to advance it until we hit a prime number or we are out of range.
-      return primeIdentifyer();
-      } while (!primes[current] && current <= n);  
+      return primeIdentifyer(); 
     }
   };
   return primeIdentifyer();
