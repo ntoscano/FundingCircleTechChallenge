@@ -5,9 +5,8 @@ var primeNumberTableCreator = function(n){
   The first two functions, _range and _primeArray, are helper functions.
   _tableCreator is the function that creates the matrix.
     It takes one argument, n, which defines the range of the table.
-  */
 
-  /*
+    
   Time complexity is defined by the most expensive operation in a function. 
     The most expensive operations here are the for-loop inside the while-loop in _primeArray
     and the nested for-loop in _tableCreator.
@@ -74,7 +73,6 @@ var primeNumberTableCreator = function(n){
 
     //Populate first row
     var primeArray = [''].concat(_primeArray(n));
-    var matrix = [primeArray]; //The purpose of matrix is to test primeNumberTableCreator
     var table = new Table({
         head: primeArray
     });
@@ -86,15 +84,10 @@ var primeNumberTableCreator = function(n){
       for(var j = 1; j < primeArray.length; j++){
         row.push(row[0] * primeArray[j]);
       }
-      matrix.push(row);
       table.push(row);
     }
 
-
-    return {
-      table: table.toString(),
-      matrix: matrix
-    };
+    return table;
   };
 
 
@@ -107,10 +100,13 @@ var primeNumberTableCreator = function(n){
     //We return error for testing purposes
     return "TableMaker.js only takes positive integers greater than 1 as arguments";
   }else{
+    var table = _tableCreater(n); 
     //We log the table for visual representation in terminal
-    console.log(_tableCreater(n).table); 
+    console.log(table.toString()); 
     //We return matrix for testing purposes
-    return _tableCreater(n).matrix; 
+    var matrix = [table.options.head];
+    for(var i = 0; i < table.length; i++) matrix.push(table[i]);
+    return matrix; 
   }
 
 }

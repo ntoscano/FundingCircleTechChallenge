@@ -13,10 +13,12 @@ describe('TableMaker', function(){
   });
 
   it('should work with valid input', function(){
-    TableMaker.primeNumberTableCreator(3).should.eql([
-      ['', 2, 3],
-      [2, 4, 6],
-      [3, 6, 9]]);
+    TableMaker.primeNumberTableCreator().should.eql([
+      ['', 2, 3, 5, 7],
+      [2, 4, 6, 10, 14],
+      [3, 6, 9, 15, 21],
+      [5, 10, 15, 25, 35],
+      [7, 14, 21, 35, 49]]);
     TableMaker.primeNumberTableCreator(20).should.eql([
       ['', 2, 3, 5, 7, 11, 13, 17, 19],
       [2, 4, 6, 10, 14, 22, 26, 34, 38],
