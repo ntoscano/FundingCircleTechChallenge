@@ -56,34 +56,35 @@
   };
 
   var _tableCreater = function(n){
-    if(typeof n !== 'number' || n < 2 || n !== Math.floor(n)) return "tableCreater only takes positive integers greater than 1";
-    var table = [];
+    if(typeof n !== 'number' || n < 2 || n !== Math.floor(n) || isNaN(n)) return "TableMaker.js only takes integers as arguments";
+    var matrix = [];
     //Populate first row
-    table.push(['null'].concat(_primeArray(n)));
-    // table[0].unshift(null);
+    matrix.push(['null'].concat(_primeArray(n)));
+    // matrix[0].unshift(null);
     //Populate first column
-    for(var i = 1; i < table[0].length; i++){
-      table.push([table[0][i]]);
+    for(var i = 1; i < matrix[0].length; i++){
+      matrix.push([matrix[0][i]]);
       //Populate the rest of the row
-      for(var j = 1; j < table[0].length; j++){
-        table[i].push(table[i][0] * table[0][j]);
+      for(var j = 1; j < matrix[0].length; j++){
+        matrix[i].push(matrix[i][0] * matrix[0][j]);
       }
     }
-    return table;
+    var table = new Table({
+        head: matrix[0]
+    });
+
+    for(var i = 1; i < matrix[0].length; i++){
+      table.push(matrix[i]);
+    }
+
+    return (table.toString());
   };
 
-  var matrix = _tableCreater(parseInt(process.argv[2]));
+  var n; 
+  if(process.argv[2] === undefined) n = 10;
+  else n = process.argv[2];
 
-  var table = new Table({
-      head: matrix[0]
-  });
-
-  for(var i = 1; i < matrix[0].length; i++){
-    table.push(matrix[i]);
-  }
-
-
-  console.log(table.toString());
+  console.log(_tableCreater(parseInt(n)));
 
 })();
 
