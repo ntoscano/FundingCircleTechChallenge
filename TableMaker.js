@@ -112,6 +112,7 @@ var tableToMatrix = function(table){
 //Log table to terminal
 console.log(primeNumberTableCreator(process.argv[2]).toString());
 
+//Export functions for testing
 module.exports = {
   primeNumberTableCreator: primeNumberTableCreator,
   tableToMatrix: tableToMatrix
