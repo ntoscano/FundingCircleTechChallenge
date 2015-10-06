@@ -6,7 +6,7 @@ var primeNumberTableCreator = function(n){
   _tableCreator is the function that creates the matrix.
     It takes one argument, n, which defines the range of the table.
 
-    
+
   Time complexity is defined by the most expensive operation in a function. 
     The most expensive operations here are the for-loop inside the while-loop in _primeArray
     and the nested for-loop in _tableCreator.
@@ -91,7 +91,7 @@ var primeNumberTableCreator = function(n){
   };
 
 
-  if(n === undefined) n = 10;
+  if(n === undefined) n = 29;
   else n = parseFloat(n);
 
   if(n < 2 || n !== Math.floor(n) || isNaN(n)){
