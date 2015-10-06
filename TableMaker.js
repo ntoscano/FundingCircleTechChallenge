@@ -3,25 +3,35 @@
 
   var Table = require('cli-table');
   /*
-  The first two functions, range and primeArray, are helper functions.
+  The first two functions, _range and _primeArray, are helper functions.
   tableCreator is the function that created the matrix.
     It takes one argument, n, which defines the range of the table.
   */
 
   /*
-  Time complexity is defined by the most expensive opperation in a function. 
-    The most expensive opperations here are the for-loop inside the while loop in "_primeArray"
+  Time complexity is defined by the most expensive operation in a function. 
+    The most expensive operations here are the for-loop inside the while loop in "_primeArray"
     and the nested for-loop in 'tableCreator'.
 
     This means the time complexity is O(n^2).
 
-    Consequently, this function becomes quadradically more expensive as n increases.
+    Consequently, this function becomes quadratically more expensive as n increases.
 
     Given that this is a matrix operation, O(n^2) isn't too bad.
 
   Space complexity is defined by how many objects in memory get instantiated in relation to the input.
     Since we're creating a matrix, it doesn't make sense to expect anything other than O(n^2),
     given that the requirements of the problem were to create an n * n matrix.
+ ******
+  A notable difference is the change from recursion to a while-loop and the optimization
+   created for the "current" variable inside "_primeArray".
+
+  The change to the while-loop prevents unnecessary call-stacks from being created.
+
+  The "current" variable optimization prevents "current" from being assigned to numbers that's
+    multiples have already been assigned to null. i.e. after all multiples of 2 have been set to null, 
+    multiples of 4 can be ignored. 
+ ******
   */
 
   var _range = function (n) {
@@ -36,7 +46,7 @@
     var current = 2; 
     var primes = _range(n);
     // While we haven't found all the primes.
-    while (current < n) {
+    while (current < n) { // 
     //Once we reach the n of the desired recursion cycle, filter nonprimes from final array
       for (var i = current + current; i <= n; i += current) {
         // null means not prime, a number means prime
@@ -56,7 +66,7 @@
   };
 
   var _tableCreater = function(n){
-    if(typeof n !== 'number' || n < 2 || n !== Math.floor(n) || isNaN(n)) return "TableMaker.js only takes integers as arguments";
+    if(typeof n !== 'number' || n < 2 || n !== Math.floor(n) || isNaN(n)) return "TableMaker.js only takes positive integers greater than 1 as arguments";
     var matrix = [];
     //Populate first row
     matrix.push(['null'].concat(_primeArray(n)));
