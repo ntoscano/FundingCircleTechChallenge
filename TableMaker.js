@@ -95,15 +95,15 @@ var primeNumberTableCreator = function(n){
   else n = parseFloat(n);
 
   if(n < 2 || n !== Math.floor(n) || isNaN(n)){
-    //We log error for visal representation in the terminal
+    //Log error for visal representation in the terminal
     console.log("TableMaker.js only takes positive integers greater than 1 as arguments"); 
-    //We return error for testing purposes
+    //Return error for testing purposes
     return "TableMaker.js only takes positive integers greater than 1 as arguments";
   }else{
     var table = _tableCreater(n); 
-    //We log the table for visual representation in terminal
+    //Log the table for visual representation in terminal
     console.log(table.toString()); 
-    //We return matrix for testing purposes
+    //Return matrix for testing purposes
     var matrix = [table.options.head];
     for(var i = 0; i < table.length; i++) matrix.push(table[i]);
     return matrix; 
