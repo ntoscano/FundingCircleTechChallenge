@@ -4,14 +4,14 @@
   var Table = require('cli-table');
   /*
   The first two functions, _range and _primeArray, are helper functions.
-  tableCreator is the function that created the matrix.
+  "_tableCreator" is the function that creates the matrix.
     It takes one argument, n, which defines the range of the table.
   */
 
   /*
   Time complexity is defined by the most expensive operation in a function. 
-    The most expensive operations here are the for-loop inside the while loop in "_primeArray"
-    and the nested for-loop in 'tableCreator'.
+    The most expensive operations here are the for-loop inside the while-loop in "_primeArray"
+    and the nested for-loop in "_tableCreator".
 
     This means the time complexity is O(n^2).
 
@@ -28,11 +28,12 @@
 
   The change to the while-loop prevents unnecessary call-stacks from being created.
 
-  The "current" variable optimization prevents "current" from being assigned to numbers that's
+  The "current" variable optimization prevents "current" from being assigned to a number that's
     multiples have already been assigned to null. i.e. after all multiples of 2 have been set to null, 
     multiples of 4 can be ignored. 
  ******
   */
+
 
   var _range = function (n) {
     var result = [];
@@ -46,55 +47,61 @@
     var current = 2; 
     var primes = _range(n);
     // While we haven't found all the primes.
-    while (current < n) { // 
-    //Once we reach the n of the desired recursion cycle, filter nonprimes from final array
+    while (current < n) {
+
+      // Removes all multiples of current from primes array
       for (var i = current + current; i <= n; i += current) {
         // null means not prime, a number means prime
         primes[i] = null;
       }  
+
+      // Incriment current and skip numbers whose multiples are already set to null
       do {
         // Advance current at least once
         current += 1;
         // Then continue to advance it until we hit a prime number or we are out of
         // range.
       } while (!primes[current] && current <= n);
-      // Then continue to advance it until we hit a prime number or we are out of range.
     };
+
+    // Slice out 0 and 1 from primes array and filter our all null elements
     return primes.slice(2).filter(function (val) {
       return val;
     });;
   };
 
   var _tableCreater = function(n){
-    if(typeof n !== 'number' || n < 2 || n !== Math.floor(n) || isNaN(n)) return "TableMaker.js only takes positive integers greater than 1 as arguments";
-    var matrix = [];
+
     //Populate first row
-    matrix.push(['null'].concat(_primeArray(n)));
-    // matrix[0].unshift(null);
-    //Populate first column
-    for(var i = 1; i < matrix[0].length; i++){
-      matrix.push([matrix[0][i]]);
-      //Populate the rest of the row
-      for(var j = 1; j < matrix[0].length; j++){
-        matrix[i].push(matrix[i][0] * matrix[0][j]);
-      }
-    }
+    var primeArray = [''].concat(_primeArray(n))
     var table = new Table({
-        head: matrix[0]
+        head: primeArray
     });
 
-    for(var i = 1; i < matrix[0].length; i++){
-      table.push(matrix[i]);
+    //Populate first column
+    for(var i = 1; i < primeArray.length; i++){
+      var row = [primeArray[i]];
+      //Populate the rest of the row
+      for(var j = 1; j < primeArray.length; j++){
+        row.push(row[0] * primeArray[j]);
+      }
+      table.push(row);
     }
 
     return (table.toString());
   };
 
-  var n; 
-  if(process.argv[2] === undefined) n = 10;
-  else n = process.argv[2];
+  
+  if(process.argv[2] === undefined) var n = 10;
+  else var n = parseInt(process.argv[2]);
 
-  console.log(_tableCreater(parseInt(n)));
+  if(n < 2 || n !== Math.floor(n) || isNaN(n)){
+    console.log("TableMaker.js only takes positive integers greater than 1 as arguments");
+    return;
+  }else{
+    console.log(_tableCreater(n));
+    return;
+  }
 
 })();
 
