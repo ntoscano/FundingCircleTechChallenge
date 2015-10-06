@@ -90,31 +90,31 @@ var primeNumberTableCreator = function(n){
     return table;
   };
 
-
+  //Set default value of n
   if(n === undefined) n = 29;
   else n = parseFloat(n);
 
-  if(n < 2 || n !== Math.floor(n) || isNaN(n)){
-    //Log error for visal representation in the terminal
-    console.log("TableMaker.js only takes positive integers greater than 1 as arguments"); 
-    //Return error for testing purposes
-    return "TableMaker.js only takes positive integers greater than 1 as arguments";
-  }else{
-    var table = _tableCreater(n); 
-    //Log the table for visual representation in terminal
-    console.log(table.toString()); 
-    //Return matrix for testing purposes
-    var matrix = [table.options.head];
-    for(var i = 0; i < table.length; i++) matrix.push(table[i]);
-    return matrix; 
-  }
+  //Verify valid input
+  if(n < 2 || n !== Math.floor(n) || isNaN(n)) return "TableMaker.js only takes positive integers greater than 1 as arguments";
+  else return _tableCreater(n);
 
 }
 
-primeNumberTableCreator(process.argv[2]);
+//Convert table to matrix for testing purposes
+var tableToMatrix = function(table){
+  var matrix = [table.options.head];
+  for(var i = 0; i < table.length; i++){ 
+    matrix.push(table[i]);
+  }
+  return matrix;
+};
+
+//Log table to terminal
+console.log(primeNumberTableCreator(process.argv[2]).toString());
 
 module.exports = {
-  primeNumberTableCreator: primeNumberTableCreator
+  primeNumberTableCreator: primeNumberTableCreator,
+  tableToMatrix: tableToMatrix
 }
 
 

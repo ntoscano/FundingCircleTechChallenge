@@ -1,19 +1,22 @@
-var TableMaker = require('./TableMaker.js');
+var TableMaker = require('./TableMaker.js'),
+    primeNumberTableCreator = TableMaker.primeNumberTableCreator,
+    tableToMatrix = TableMaker.tableToMatrix;
+
 var should = require('should');
 
 
 describe('TableMaker', function(){
 
   it('should return error message for invalid inputs', function(){
-    TableMaker.primeNumberTableCreator(null).should.equal("TableMaker.js only takes positive integers greater than 1 as arguments");
-    TableMaker.primeNumberTableCreator([]).should.equal("TableMaker.js only takes positive integers greater than 1 as arguments");
-    TableMaker.primeNumberTableCreator(1).should.equal("TableMaker.js only takes positive integers greater than 1 as arguments");
-    TableMaker.primeNumberTableCreator(67.8).should.equal("TableMaker.js only takes positive integers greater than 1 as arguments");
-    TableMaker.primeNumberTableCreator(-11).should.equal("TableMaker.js only takes positive integers greater than 1 as arguments");
+    primeNumberTableCreator(null).should.equal("TableMaker.js only takes positive integers greater than 1 as arguments");
+    primeNumberTableCreator([]).should.equal("TableMaker.js only takes positive integers greater than 1 as arguments");
+    primeNumberTableCreator(1).should.equal("TableMaker.js only takes positive integers greater than 1 as arguments");
+    primeNumberTableCreator(67.8).should.equal("TableMaker.js only takes positive integers greater than 1 as arguments");
+    primeNumberTableCreator(-11).should.equal("TableMaker.js only takes positive integers greater than 1 as arguments");
   });
 
   it('should work with valid input', function(){
-    TableMaker.primeNumberTableCreator(20).should.eql([
+    tableToMatrix(primeNumberTableCreator(20)).should.eql([
       ['', 2, 3, 5, 7, 11, 13, 17, 19],
       [2, 4, 6, 10, 14, 22, 26, 34, 38],
       [3, 6, 9, 15, 21, 33, 39, 51, 57],
@@ -23,7 +26,7 @@ describe('TableMaker', function(){
       [13, 26, 39, 65, 91, 143, 169, 221, 247],
       [17, 34, 51, 85, 119, 187, 221, 289, 323],
       [19, 38, 57, 95, 133, 209, 247, 323, 361]]);
-    TableMaker.primeNumberTableCreator().should.eql([
+    tableToMatrix(primeNumberTableCreator()).should.eql([
       ['', 2, 3, 5, 7, 11, 13, 17, 19, 23, 29],
       [2, 4, 6, 10, 14, 22, 26, 34, 38, 46, 58],
       [3, 6, 9, 15, 21, 33, 39, 51, 57, 69, 87],
