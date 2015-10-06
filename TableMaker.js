@@ -1,17 +1,16 @@
 // PrimeMultiTable.js
-(function(){
-
+var primeNumberTableCreator = function(n){
   var Table = require('cli-table');
   /*
   The first two functions, _range and _primeArray, are helper functions.
-  "_tableCreator" is the function that creates the matrix.
+  _tableCreator is the function that creates the matrix.
     It takes one argument, n, which defines the range of the table.
   */
 
   /*
   Time complexity is defined by the most expensive operation in a function. 
-    The most expensive operations here are the for-loop inside the while-loop in "_primeArray"
-    and the nested for-loop in "_tableCreator".
+    The most expensive operations here are the for-loop inside the while-loop in _primeArray
+    and the nested for-loop in _tableCreator.
 
     This means the time complexity is O(n^2).
 
@@ -22,13 +21,14 @@
   Space complexity is defined by how many objects in memory get instantiated in relation to the input.
     Since we're creating a matrix, it doesn't make sense to expect anything other than O(n^2),
     given that the requirements of the problem were to create an n * n matrix.
+
  ******
   A notable difference is the change from recursion to a while-loop and the optimization
-   created for the "current" variable inside "_primeArray".
+   created for the current variable inside _primeArray.
 
   The change to the while-loop prevents unnecessary call-stacks from being created.
 
-  The "current" variable optimization prevents "current" from being assigned to a number that's
+  The current variable optimization prevents current from being assigned to a number that's
     multiples have already been assigned to null. i.e. after all multiples of 2 have been set to null, 
     multiples of 4 can be ignored. 
  ******
@@ -73,7 +73,8 @@
   var _tableCreater = function(n){
 
     //Populate first row
-    var primeArray = [''].concat(_primeArray(n))
+    var primeArray = [''].concat(_primeArray(n));
+    var matrix = [primeArray]; //The purpose of matrix is to test primeNumberTableCreator
     var table = new Table({
         head: primeArray
     });
@@ -85,27 +86,40 @@
       for(var j = 1; j < primeArray.length; j++){
         row.push(row[0] * primeArray[j]);
       }
+      matrix.push(row);
       table.push(row);
     }
 
-    return (table.toString());
+
+    return {
+      table: table.toString(),
+      matrix: matrix
+    };
   };
 
-  
-  if(process.argv[2] === undefined) var n = 10;
-  else var n = parseInt(process.argv[2]);
+
+  if(n === undefined) n = 10;
+  else n = parseFloat(n);
 
   if(n < 2 || n !== Math.floor(n) || isNaN(n)){
-    console.log("TableMaker.js only takes positive integers greater than 1 as arguments");
-    return;
+    //We log error for visal representation in the terminal
+    console.log("TableMaker.js only takes positive integers greater than 1 as arguments"); 
+    //We return error for testing purposes
+    return "TableMaker.js only takes positive integers greater than 1 as arguments";
   }else{
-    console.log(_tableCreater(n));
-    return;
+    //We log the table for visual representation in terminal
+    console.log(_tableCreater(n).table); 
+    //We return matrix for testing purposes
+    return _tableCreater(n).matrix; 
   }
 
-})();
+}
 
+primeNumberTableCreator(process.argv[2]);
 
+module.exports = {
+  primeNumberTableCreator: primeNumberTableCreator
+}
 
 
 

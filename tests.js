@@ -1,47 +1,24 @@
-describe('primeArray', function (){
+var TableMaker = require('./TableMaker.js');
+var should = require('should');
 
-  it('should be a function', function(){
-    primeArray.should.be.a.Function;
-  });
 
-  it('should take one argument', function(){
-    primeArray.length.should.equal(1);
-  });
-  
-  it('should return an array', function(){
-    primeArray(10).should.be.an.instanceOf(Array);
-  });
-
-  it('should return every prime between 1 and 20', function(){
-    primeArray(20).should.eql([2, 3, 5, 7, 11, 13, 17, 19]);
-  });
-
-});
-
-describe('tableCreater', function(){
-  it('should be a function', function(){
-    tableCreater.should.be.a.Function;
-  });
-
-  it('should take one argument', function(){
-    tableCreater.length.should.equal(1);
-  });
+describe('TableMaker', function(){
 
   it('should return error message for invalid inputs', function(){
-    tableCreater(null).should.equal("tableCreater only takes positive integers greater than 1");
-    tableCreater([]).should.equal("tableCreater only takes positive integers greater than 1");
-    tableCreater(1).should.equal("tableCreater only takes positive integers greater than 1");
-    tableCreater(67.8).should.equal("tableCreater only takes positive integers greater than 1");
-    tableCreater(-11).should.equal("tableCreater only takes positive integers greater than 1");
+    TableMaker.primeNumberTableCreator(null).should.equal("TableMaker.js only takes positive integers greater than 1 as arguments");
+    TableMaker.primeNumberTableCreator([]).should.equal("TableMaker.js only takes positive integers greater than 1 as arguments");
+    TableMaker.primeNumberTableCreator(1).should.equal("TableMaker.js only takes positive integers greater than 1 as arguments");
+    TableMaker.primeNumberTableCreator(67.8).should.equal("TableMaker.js only takes positive integers greater than 1 as arguments");
+    TableMaker.primeNumberTableCreator(-11).should.equal("TableMaker.js only takes positive integers greater than 1 as arguments");
   });
 
   it('should work with valid input', function(){
-    tableCreater(3).should.eql([
-      [null, 2, 3],
+    TableMaker.primeNumberTableCreator(3).should.eql([
+      ['', 2, 3],
       [2, 4, 6],
       [3, 6, 9]]);
-    tableCreater(20).should.eql([
-      [null, 2, 3, 5, 7, 11, 13, 17, 19],
+    TableMaker.primeNumberTableCreator(20).should.eql([
+      ['', 2, 3, 5, 7, 11, 13, 17, 19],
       [2, 4, 6, 10, 14, 22, 26, 34, 38],
       [3, 6, 9, 15, 21, 33, 39, 51, 57],
       [5, 10, 15, 25, 35, 55, 65, 85, 95],
