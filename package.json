@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "./PrimeMultiTable.js",
   "dependencies": {
+    "cli-table": "^0.3.1",
     "mocha": "^2.3.3",
     "should": "^7.1.0"
   }
